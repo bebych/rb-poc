@@ -24,8 +24,6 @@ jobs:
     - name: Terragrunt apply
       run: |
         terraform -v
-        echo ${GITHUB_REF##*/}
-        export ENV_NAME=${GITHUB_REF##*/}
-        env | grep ENV
-        pwd
-        aws s3 ls
+        echo ${{ github.base_ref }}
+        export ENV_NAME=${GITHUB_REF##*/} &&  env | grep ENV
+        ls -la
