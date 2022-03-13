@@ -21,9 +21,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Terragrunt apply
+    - name: Build shared environment
+      env:
+        ENV_NAME: shared
       run: |
-        terraform -v
-        echo ${{ github.head_ref }}
-        export ENV_NAME="${{ github.head_ref }}" &&  env | grep ENV
-        ls -la
+        env | grep ENV
+
+    - name: Build mini-environment
+      env:
+        ENV_NAME: ${{ github.head_ref }}
+      run: |
+        env | grep ENV
