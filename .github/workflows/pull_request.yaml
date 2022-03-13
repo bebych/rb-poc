@@ -32,11 +32,12 @@ jobs:
       env:
         ENV_NAME: shared
       run: |
-        terragrunt -v
-        env | grep ENV
+        cd environments/shared-dev
+        terragrunt apply -auto-approve
 
     - name: Build mini-environment
       env:
         ENV_NAME: ${{ github.head_ref }}
       run: |
-        env | grep ENV
+        cd environments/dev
+        terragrunt apply -auto-approve
