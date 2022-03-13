@@ -13,10 +13,17 @@ jobs:
       AWS_DEFAULT_REGION: us-east-1
 
     steps:
-    - name: Setup Terraform
+    - name: Install Terraform
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 1.1.2
+
+    - name: Install Terragrunt
+      uses: supplypike/setup-bin@v1
+      with:
+        uri: 'https://github.com/gruntwork-io/terragrunt/releases/download/v0.35.16/terragrunt_linux_amd64'
+        name: 'terragrunt'
+        version: '0.35.16'
 
     - name: Checkout
       uses: actions/checkout@v2
@@ -25,6 +32,7 @@ jobs:
       env:
         ENV_NAME: shared
       run: |
+        terragrunt -v
         env | grep ENV
 
     - name: Build mini-environment
