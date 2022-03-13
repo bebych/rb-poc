@@ -25,5 +25,5 @@ jobs:
       run: |
         terraform -v
         echo ${{ github.base_ref }}
-        export ENV_NAME=${GITHUB_REF##*/} &&  env | grep ENV
+        export ENV_NAME=${{ github.base_ref }} &&  env | grep ENV
         ls -la
