@@ -24,6 +24,6 @@ jobs:
     - name: Terragrunt apply
       run: |
         terraform -v
-        echo ${{ github.base_ref }}
-        export ENV_NAME=${{ github.base_ref }} &&  env | grep ENV
+        echo ${{ github.head_ref }}
+        export ENV_NAME="${{ github.head_ref }}" &&  env | grep ENV
         ls -la
