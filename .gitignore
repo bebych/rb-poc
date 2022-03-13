@@ -1,0 +1,20 @@
+# Vim swap files
+.*.sw?
+
+# Terraform/Terragrunt files
+.terraform/
+.terragrunt-cache/
+*.tfstate*
+*.out
+
+# IDEA
+.idea/
+.idea_modules/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# VPN
+*.ovpn

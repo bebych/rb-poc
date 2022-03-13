@@ -1,0 +1,31 @@
+name: Pull Request
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  pull_request:
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWSACCESSKEYID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWSSECRETACCESSKEY }}
+      AWS_DEFAULT_REGION: us-east-1
+
+    steps:
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.1.2
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Terragrunt apply
+      run: |
+        terraform -v
+        echo ${GITHUB_REF##*/}
+        export ENV_NAME=${GITHUB_REF##*/}
+        env | grep ENV
+        pwd
+        aws s3 ls
