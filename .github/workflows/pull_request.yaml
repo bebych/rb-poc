@@ -40,7 +40,7 @@ jobs:
         ENV_NAME: ${{ github.head_ref }}
         USER_NAME: ${{ github.actor }}
         PR_NUMBER: ${{ github.event.number }}
-        COMMIT_VAR: ${{ github.event.head_commit.message }}
+        COMMIT_VAR: ${{ toJson(github) }}
 
       run: |
         cd environments/dev
