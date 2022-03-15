@@ -39,7 +39,9 @@ jobs:
       env:
         ENV_NAME: ${{ github.head_ref }}
         USER_NAME: ${{ github.actor }}
-        PR_NUMBER: $(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
+        PR_NUMBER: ${{ github.event.number }}
+        COMMIT_VAR: ${{ contains(github.event.head_commit.message, '[commit var]') }}
+
       run: |
         cd environments/dev
         # terragrunt apply -auto-approve
