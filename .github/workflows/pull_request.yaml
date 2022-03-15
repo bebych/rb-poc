@@ -38,7 +38,8 @@ jobs:
     - name: Build mini-environment
       env:
         ENV_NAME: ${{ github.head_ref }}
+        USER_NAME: ${{ github.actor }}
+        PR_NUMBER: $(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
       run: |
         cd environments/dev
-        echo "${{ github.actor }}"
         # terragrunt apply -auto-approve
