@@ -28,16 +28,17 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Build shared environment
-      env:
-        ENV_NAME: shared
-      run: |
-        cd environments/shared-dev
-        terragrunt apply -auto-approve
+    # - name: Build shared environment
+    #   env:
+    #     ENV_NAME: shared
+    #   run: |
+    #     cd environments/shared-dev
+    #     terragrunt apply -auto-approve
 
     - name: Build mini-environment
       env:
         ENV_NAME: ${{ github.head_ref }}
       run: |
         cd environments/dev
-        terragrunt apply -auto-approve
+        echo "${{ github.actor }}"
+        # terragrunt apply -auto-approve
