@@ -1,0 +1,45 @@
+name: Merge to Master
+on:
+  push:
+    branches: [ master ]
+
+permissions:
+ id-token: write
+ contents: read
+
+jobs:
+  pull_request:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.1.2
+
+    - name: Install Terragrunt
+      uses: supplypike/setup-bin@v1
+      with:
+        uri: 'https://github.com/gruntwork-io/terragrunt/releases/download/v0.35.16/terragrunt_linux_amd64'
+        name: 'terragrunt'
+        version: '0.35.16'
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      
+    - name: configureawscredentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::394106777563:role/GitHub-actions-role
+        role-session-name: samplerolesession
+        aws-region: us-east-1
+
+    - name: Destroy mini-environment
+      env:
+        ENV_NAME: ${{ github.head_ref }}
+        USER_NAME: ${{ github.actor }}
+        PR_NUMBER: ${{ github.event.number }}
+        COMMIT_MESSAGE: ${{ github.event.pull_request.title }}
+      run: |
+        cd environments/dev
+        # terragrunt destroy -auto-approve
