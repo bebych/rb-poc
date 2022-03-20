@@ -7,7 +7,7 @@ permissions:
  contents: read
 
 jobs:
-  pull_request:
+  destroy_mini_env:
     runs-on: ubuntu-latest
 
     steps:
@@ -42,4 +42,4 @@ jobs:
       run: |
         cd environments/dev
         # terragrunt destroy -auto-approve
-        echo ${{ github }}
+        echo ${{ toJson(github) }}
