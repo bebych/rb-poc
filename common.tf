@@ -1,4 +1,4 @@
-### Common variables.
+### Common variables
 # Account info
 variable "aws_region" { type = string }
 variable "aws_account" { type = string }
