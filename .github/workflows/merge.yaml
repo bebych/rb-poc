@@ -42,4 +42,4 @@ jobs:
         COMMIT_MESSAGE: ${{ github.event.pull_request.title }}
       run: |
         cd environments/dev
-        # terragrunt destroy -auto-approve
+        terragrunt destroy -auto-approve
