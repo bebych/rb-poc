@@ -40,5 +40,5 @@ jobs:
         PR_NUMBER: ${{ github.run_number }}
       run: |
         cd environments/dev
-        # terragrunt destroy -auto-approve
-        echo ${{ toJson(github) }}
+        terragrunt destroy -auto-approve
+        # echo ${{ toJson(github) }}
