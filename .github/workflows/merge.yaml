@@ -35,10 +35,9 @@ jobs:
 
     - name: Destroy mini-environment
       env:
-        ENV_NAME: ${{ github.head_ref }}
+        ENV_NAME: ${{ github.event.ref }}
         USER_NAME: ${{ github.actor }}
-        PR_NUMBER: ${{ github.event.number }}
-        COMMIT_MESSAGE: ${{ github.event.pull_request.title }}
+        PR_NUMBER: ${{ github.run_number }}
       run: |
         cd environments/dev
         # terragrunt destroy -auto-approve
