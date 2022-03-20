@@ -1,7 +1,6 @@
 name: Merge to Master
 on:
-  push:
-    branches: [ master ]
+  delete
 
 permissions:
  id-token: write
