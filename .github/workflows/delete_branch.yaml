@@ -1,6 +1,7 @@
 name: Destroy mini-env when a branch was deleted
 on:
-  delete
+  pull_request:
+    types: [closed]
 
 permissions:
  id-token: write
