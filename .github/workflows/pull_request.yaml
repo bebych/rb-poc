@@ -3,13 +3,15 @@ on:
   pull_request:
     branches: [ master ]
 
+permissions:
+ id-token: write
+ contents: read
+
 jobs:
   pull_request:
     runs-on: ubuntu-latest
 
     env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWSACCESSKEYID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWSSECRETACCESSKEY }}
       AWS_DEFAULT_REGION: us-east-1
 
     steps:
@@ -25,15 +27,22 @@ jobs:
         name: 'terragrunt'
         version: '0.35.16'
 
+    - name: configureawscredentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::394106777563:role/GitHub-actions-role
+        role-session-name: samplerolesession
+        aws-region: us-east-1
+
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Build shared environment
-      env:
-        ENV_NAME: shared
-      run: |
-        cd environments/shared-dev
-        terragrunt apply -auto-approve
+#     - name: Build shared environment
+#       env:
+#         ENV_NAME: shared
+#       run: |
+#         cd environments/shared-dev
+#         terragrunt apply -auto-approve
 
     - name: Build mini-environment
       env:
