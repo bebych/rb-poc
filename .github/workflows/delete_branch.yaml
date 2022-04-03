@@ -27,7 +27,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       
-    - name: configureawscredentials
+    - name: Configure aws credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
         role-to-assume: arn:aws:iam::394106777563:role/GitHub-actions-role
