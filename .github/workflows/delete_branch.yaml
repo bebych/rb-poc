@@ -42,4 +42,3 @@ jobs:
       run: |
         cd environments/dev
         terragrunt destroy -auto-approve
-        # echo ${{ toJson(github) }}
