@@ -27,7 +27,7 @@ jobs:
         name: 'terragrunt'
         version: '0.35.16'
 
-    - name: configureawscredentials
+    - name: Configure aws credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
         role-to-assume: arn:aws:iam::394106777563:role/GitHub-actions-role
